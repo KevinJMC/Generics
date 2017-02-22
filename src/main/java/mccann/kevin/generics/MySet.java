@@ -5,25 +5,42 @@ package mccann.kevin.generics;
  */
 public class MySet<T> {
 
-    private T[] myArrSet;
+    MyArrayList<T> holderList = new MyArrayList<T>();
 
-    boolean add(T t) {}
+    void add(T t) {
+        if(!(holderList.contains(t)))
+            holderList.add(t);
+    }
 
-    void clear() {}
+    void clear() {
+        holderList.clear();
+    }
 
-    boolean contains(T t) {}
+    boolean contains(T t) {
+        return holderList.contains(t);
+    }
 
-    boolean equals(Object[] objArr) {}
+    public boolean equals(Object obj) {
+        return obj.equals(holderList);
+    }
 
-    public int hashCode() {}
+//    public int hashCode() {}
 
-    boolean isEmpty() {}
+    boolean isEmpty() {
+        return holderList.isEmpty();
+    }
 
-    boolean remove(T t) {}
+    boolean remove(T t) {
+        return holderList.remove(t);
+    }
 
-    int size() {}
+    int size() {
+        return holderList.size();
+    }
 
-    T[] toArray() {}
+    Object[] toArray() {
+        return holderList.toArray();
+    }
 
 
 }
