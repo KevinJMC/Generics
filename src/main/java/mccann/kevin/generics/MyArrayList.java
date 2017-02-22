@@ -42,6 +42,18 @@ public class MyArrayList<T>{
         }
     }
 
+    public boolean equals(Object obj) {
+        if (!(obj instanceof MyArrayList))
+            return false;
+        if (((MyArrayList) obj).size() != size())
+            return false;
+        for (int i = 0; i < size(); i++) {
+            if (!(holderArray[i].equals(((MyArrayList) obj).holderArray[i])))
+                return false;
+        }
+        return true;
+    }
+
     @SuppressWarnings("unchecked")
     T get(int index) throws IndexOutOfBoundsException{
         checkIndex(index);

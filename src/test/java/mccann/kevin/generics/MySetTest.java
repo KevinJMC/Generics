@@ -51,20 +51,15 @@ public class MySetTest {
         assertFalse(testSet.contains(j));
     }
 
-//    @Test
-//    public void equalsTest() throws Exception {
-//        testSet.add(c);
-//        testSet.add(j);
-//        MySet<Object> equalSet = new MySet<>();
-//        equalSet.add(c);
-//        equalSet.add(j);
-//        assertTrue(testSet.equals(equalSet));
-//    }
-
-//    @Test
-//    public void hashCodeTest() throws Exception {
-//
-//    }
+    @Test
+    public void equalsTest() throws Exception {
+        testSet.add(c);
+        testSet.add(j);
+        MySet<Object> equalSet = new MySet<>();
+        equalSet.add(c);
+        equalSet.add(j);
+        assertTrue(testSet.equals(equalSet));
+    }
 
     @Test
     public void isEmptyTest() throws Exception {
