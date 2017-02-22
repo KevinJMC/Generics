@@ -45,13 +45,7 @@ public class MyArrayListTest {
     @Test
     public void containsTest() throws Exception {
         testList.add(o);
-        assertTrue(testList.contains(o);
-    }
-
-    @Test
-    public void ensureCapacityTest() throws Exception {
-        testList.ensureCapacity(4);
-        assertTrue(testList.size()>=4);
+        assertTrue(testList.contains(o));
     }
 
     @Test
@@ -98,7 +92,7 @@ public class MyArrayListTest {
         testList.add(k);
         testList.add(o);
         testList.remove(o);
-        assertEquals("the first index of o should be 2 not 0",2, testList.indexOf(o));
+        assertEquals(1, testList.indexOf(o));
     }
 
     @Test
@@ -108,8 +102,8 @@ public class MyArrayListTest {
         testList.add(o);
         testList.removeRange(0,2);
         assertFalse(testList.contains(k));
-        assertEquals(3, testList.size());
-        assertEquals(2, testList.indexOf(o));
+        assertEquals(1, testList.size());
+        assertEquals(0, testList.indexOf(o));
     }
 
     @Test

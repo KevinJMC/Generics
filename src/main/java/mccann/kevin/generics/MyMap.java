@@ -13,7 +13,7 @@ public class MyMap<E, T> {
 
     boolean containsValue(T value) {}
 
-    MySet<> entrySet() {}
+    MySet<T> entrySet() {}
 
     public boolean equals(Object O) {}
 
