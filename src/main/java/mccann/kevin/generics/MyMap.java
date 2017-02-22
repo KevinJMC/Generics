@@ -3,33 +3,102 @@ package mccann.kevin.generics;
 /**
  * Created by kevinmccann on 2/22/17.
  */
-public class MyMap<E, T> {
+public class MyMap<E,T> {
 
-    private E[] myArrMap;
+    MyArrayList<MyEntry> holderList = new MyArrayList<>();
 
-    void clear() {}
+    void clear() {
+        holderList.clear();
+    }
 
-    boolean containsKey(E key) {}
+    boolean containsKey(E key) {
+        for(int i = 0; i<holderList.size(); i++) {
+            if(holderList.get(i).getKey() == key)
+                return true;
+        } return false;
+    }
 
-    boolean containsValue(T value) {}
+    boolean containsValue(T value) {
+        for(int i = 0; i<holderList.size(); i++) {
+            if(holderList.get(i).getValue() == value)
+                return true;
+        } return false;
+    }
 
-    MySet<T> entrySet() {}
+    MySet<MyEntry> entrySet() {
+        MySet<MyEntry> holdSet = new MySet<>();
+        for (int i = 0; i < holderList.size(); i++) {
+            holdSet.add(holderList.get(i));
+        }
+        return holdSet;
+    }
 
-    public boolean equals(Object O) {}
+//    public boolean equals(Object O) {}
 
-    T get(E key) {}
+    @SuppressWarnings("unchecked")
+    T get(E key) {
+        for (int i = 0; i < holderList.size(); i++) {
+            if(holderList.get(i).getKey() == key)
+                return (T) holderList.get(i).getValue();
+        }
+        return null;
+    }
 
-    public int hashCode() {}
+//    public int hashCode() {}
 
-    boolean isEmpty() {}
+    boolean isEmpty() {
+        return holderList.isEmpty();
+    }
 
-    MySet<E> keySet() {}
+    MySet<E> keySet() {
+        MySet<E> holdSet = new MySet<>();
+        for (int i = 0; i < holderList.size(); i++) {
+            holdSet.add((E)holderList.get(i).getKey());
+        }
+        return holdSet;
+    }
 
-    T put(E key, T value) {}
 
-    T remove(E key) {}
+    void put(E key, T value) {
+        holderList.add(new MyEntry(key, value));
+    }
 
-    int size() {}
+    void remove(E key) {
+        for (int i = 0; i < holderList.size(); i++) {
+            if(holderList.get(i).getKey()==key)
+                holderList.remove(i);
+        }
+    }
 
-    MyArrayList<T> values() {}
+    int size() {
+        return holderList.size();
+    }
+
+    @SuppressWarnings("unchecked")
+    MyArrayList<T> values() {
+        MyArrayList<T> tempList = new MyArrayList<T>();
+        for (int i = 0; i < holderList.size(); i++) {
+            tempList.add((T) holderList.get(i).getValue());
+        }
+        return tempList;
+    }
+
+    class MyEntry<E,T> {
+        E key;
+
+        T value;
+
+        E getKey() {
+            return key;
+        }
+
+        T getValue() {
+            return value;
+        }
+
+        MyEntry (E e, T t) {
+            this.key = e;
+            this.value = t;
+        }
+    }
 }

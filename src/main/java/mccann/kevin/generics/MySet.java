@@ -5,7 +5,7 @@ package mccann.kevin.generics;
  */
 public class MySet<T> {
 
-    MyArrayList<T> holderList = new MyArrayList<T>();
+    MyArrayList<T> holderList = new MyArrayList<>();
 
     void add(T t) {
         if(!(holderList.contains(t)))

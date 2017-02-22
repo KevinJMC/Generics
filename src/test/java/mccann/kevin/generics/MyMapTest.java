@@ -111,7 +111,7 @@ public class MyMapTest {
         valueList.add(m);
         testMap.put(i, t);
         testMap.put(e, m);
-        assertEquals(valueList,testMap.keySet());
+        assertEquals(valueList,testMap.values());
     }
 
 }
