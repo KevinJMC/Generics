@@ -11,7 +11,7 @@ public class MyMap<E, T> {
 
     boolean containsKey(E key) {}
 
-    boolean containsValues(T value) {}
+    boolean containsValue(T value) {}
 
     MySet<> entrySet() {}
 

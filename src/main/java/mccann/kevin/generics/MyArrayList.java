@@ -16,9 +16,9 @@ public class MyArrayList<T>{
 
     void clear() {}
 
-    boolean contains() {}
+    boolean contains(T t) {}
 
-    void ensureCapacity() {}
+    void ensureCapacity(int capacity) {}
 
     T get(int index) {}
 
@@ -26,7 +26,7 @@ public class MyArrayList<T>{
 
     boolean isEmpty() {}
 
-    int lastIndexOf() {}
+    int lastIndexOf(T t) {}
 
     T remove(int index) {}
 
