@@ -6,24 +6,24 @@ import java.util.Arrays;
  * Created by kevinmccann on 2/22/17.
  */
 public class MyArrayList<T>{
-    Object[] holderList;
+    private Object[] holderArray;
     private int size;
 
     void add(T t) {
         ensureCapacity(size+1);
-        holderList[size++] = t;
+        holderArray[size++] = t;
     }
 
-    void add(T t, int index) {
+    void add(T t, int index) throws IndexOutOfBoundsException{
+        checkIndex(index);
         ensureCapacity(size+1);
-        holderList[index] = t;
+        holderArray[index] = t;
         size++;
-
     }
 
     void clear() {
         for(int i = 0; i < size; i++) {
-            holderList[i] = null;
+            holderArray[i] = null;
         }
         size = 0;
     }
@@ -33,26 +33,24 @@ public class MyArrayList<T>{
     }
 
     void ensureCapacity(int capacity) {
-        int oldCapacity = holderList.length;
+        int oldCapacity = holderArray.length;
         if(capacity > oldCapacity) {
-            Object[] temp = holderList;
             int newCapacity = (int)Math.ceil(oldCapacity*1.7);
             if(newCapacity < capacity)
                 newCapacity = capacity;
-            holderList = Arrays.copyOf(holderList, newCapacity);
+            holderArray = Arrays.copyOf(holderArray, newCapacity);
         }
     }
 
     @SuppressWarnings("unchecked")
     T get(int index) throws IndexOutOfBoundsException{
-        if(index>size)
-            throw new IndexOutOfBoundsException("Invalid index");
-        return (T) holderList[index];
+        checkIndex(index);
+        return (T) holderArray[index];
     }
 
     int indexOf(T t) {
         for(int i = 0; i < size; i++) {
-            if(t.equals(holderList[i]))
+            if(t.equals(holderArray[i]))
                 return i;
         }
         return -1;
@@ -64,20 +62,21 @@ public class MyArrayList<T>{
 
     int lastIndexOf(T t) {
         for(int i = size - 1; i >= 0; i--) {
-            if(t.equals(holderList[i]))
+            if(t.equals(holderArray[i]))
                 return i;
         }
         return -1;
     }
 
-    void remove(int index) {
-        System.arraycopy(holderList, index + 1, holderList, index, size - index - 1 );
-        holderList[--size] = null;
+    void remove(int index) throws IndexOutOfBoundsException{
+        checkIndex(index);
+        System.arraycopy(holderArray, index + 1, holderArray, index, size - index - 1 );
+        holderArray[--size] = null;
     }
 
     boolean remove(T t) {
         for(int i = 0; i < size; i++) {
-            if(t.equals(holderList[i])) {
+            if(t.equals(holderArray[i])) {
                 remove(i);
                 return true;
             }
@@ -85,15 +84,16 @@ public class MyArrayList<T>{
     }
 
     void removeRange(int fromIndex, int toIndex) {
-        System.arraycopy(holderList, toIndex, holderList, fromIndex, size - toIndex);
+        System.arraycopy(holderArray, toIndex, holderArray, fromIndex, size - toIndex);
         int newSize = size - toIndex - fromIndex;
             while(!(size == newSize)) {
-                holderList[--size] = null;
+                holderArray[--size] = null;
             }
     }
 
-    void set(int index, T t) {
-        holderList[index] = t;
+    void set(int index, T t) throws IndexOutOfBoundsException{
+        checkIndex(index);
+        holderArray[index] = t;
     }
 
     int size() {
@@ -114,29 +114,33 @@ public class MyArrayList<T>{
         }
         MyArrayList<T> subList = new MyArrayList<>();
         for(int i = fromIndex; i< toIndex; i++) {
-            subList.add((T)holderList[i]);
+            subList.add((T) holderArray[i]);
         }
-//        System.arraycopy(holderList, fromIndex, subList.holderList, 0, toIndex-fromIndex);
+//        System.arraycopy(holderArray, fromIndex, subList.holderArray, 0, toIndex-fromIndex);
         return subList;
     }
 
     Object[] toArray() {
-        return Arrays.copyOf(holderList, size);
+        return Arrays.copyOf(holderArray, size);
     }
 
     void trimToSize() {
-        int oldCapacity = holderList.length;
+        int oldCapacity = holderArray.length;
         if (size < oldCapacity) {
-            holderList = Arrays.copyOf(holderList, size);
+            holderArray = Arrays.copyOf(holderArray, size);
         }
     }
 
     MyArrayList(int size) {
-        this.holderList = new Object[size];
+        this.holderArray = new Object[size];
     }
 
     MyArrayList() {
-        this.holderList = new Object[10];
+        this.holderArray = new Object[10];
     }
 
+    void checkIndex(int index){
+        if(index>size)
+            throw new IndexOutOfBoundsException("Invalid index");
+    }
 }

@@ -33,7 +33,18 @@ public class MyMap<E,T> {
         return holdSet;
     }
 
-//    public boolean equals(Object O) {}
+    @SuppressWarnings("unchecked")
+    public boolean equals(Object o) {
+        if(! (o instanceof MyMap))
+            return false;
+        if(((MyMap) o).holderList.size()!= holderList.size())
+            return false;
+        for(int i = 0; i<holderList.size(); i++){
+            if(!(holderList.get(i).equals((((MyMap) o).holderList.get(i)))))
+                return false;
+        }
+        return true;
+    }
 
     @SuppressWarnings("unchecked")
     T get(E key) {
@@ -44,12 +55,11 @@ public class MyMap<E,T> {
         return null;
     }
 
-//    public int hashCode() {}
-
     boolean isEmpty() {
         return holderList.isEmpty();
     }
 
+    @SuppressWarnings("unchecked")
     MySet<E> keySet() {
         MySet<E> holdSet = new MySet<>();
         for (int i = 0; i < holderList.size(); i++) {
@@ -60,7 +70,7 @@ public class MyMap<E,T> {
 
 
     void put(E key, T value) {
-        holderList.add(new MyEntry(key, value));
+        holderList.add(new MyEntry<>(key, value));
     }
 
     void remove(E key) {
@@ -99,6 +109,17 @@ public class MyMap<E,T> {
         MyEntry (E e, T t) {
             this.key = e;
             this.value = t;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if(! (obj instanceof MyEntry))
+                return false;
+            if(((MyEntry) obj).getKey()!= getKey())
+                return false;
+            if(((MyEntry) obj).getValue()!= getValue())
+                return false;
+            return true;
         }
     }
 }

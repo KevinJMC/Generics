@@ -21,10 +21,16 @@ public class MySet<T> {
     }
 
     public boolean equals(Object obj) {
-        return obj.equals(holderList);
+        if(! (obj instanceof MySet))
+            return false;
+        if(((MySet) obj).holderList.size()!= holderList.size())
+            return false;
+        for(int i = 0; i<holderList.size(); i++){
+            if(!(holderList.get(i).equals((((MySet) obj).holderList.get(i)))))
+                return false;
+        }
+        return true;
     }
-
-//    public int hashCode() {}
 
     boolean isEmpty() {
         return holderList.isEmpty();
